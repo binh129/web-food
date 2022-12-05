@@ -62,9 +62,9 @@ function addtocart() { /// Thêm vào giỏ hàng
 
 function removeInCard(id) {
     let localarray = JSON.parse(localStorage.getItem("product")) ? JSON.parse(localStorage.getItem("product")) : [];
-    let newArr = localarray.filter(item => item !== id);
+    let newArr = localarray.filter(item => item != id);
     localStorage.setItem(`product`, JSON.stringify(newArr))
-    window.location.reload(true);
+    location.reload(true);
 }
 
 render();
@@ -90,7 +90,9 @@ function PrdinCart(array,index) { // in sản phẩm trong giỏ hàng
                     <div class="cart-infor">
                         <div>
                             <h4>${array[i].name}</h4>
-                            <span onClick="removeInCard(${array[i].id})"><i class="far fa-trash-alt"></i></span>
+                            <span onclick="removeInCard('${array[i].id}')">
+                                <i class="far fa-trash-alt"></i>
+                            </span>
                         </div>
                         <ul>
                             <li class="cart-count">
