@@ -17,7 +17,6 @@ if(details) { // in ra Chi tiết của sản phẩm
     const product = data.find(item => {
         return item.id === prd;
     });
-    console.log(prd);
     item.classList.add("my-product")
     item.innerHTML = `
         <div class="product-img">
@@ -50,7 +49,7 @@ if(details) { // in ra Chi tiết của sản phẩm
 
 
 function addtocart() { /// Thêm vào giỏ hàng
-    localStorage.setItem("product", JSON.stringify(startarray)) // Tạo một mảng rỗng trên localStorage
+    // localStorage.setItem("product", JSON.stringify(startarray)) // Tạo một mảng rỗng trên localStorage
     const product = data.find(item => {
         return item.id === prd;
     });
@@ -61,15 +60,21 @@ function addtocart() { /// Thêm vào giỏ hàng
     render();
 }
 
+function removeInCard(id) {
+    let localarray = JSON.parse(localStorage.getItem("product")) ? JSON.parse(localStorage.getItem("product")) : [];
+    let newArr = localarray.filter(item => item !== id);
+    localStorage.setItem(`product`, JSON.stringify(newArr))
+    window.location.reload(true);
+}
+
 render();
 
 function render() {
     let localarray = localStorage.getItem("product") 
     let myarray = eval(localarray).join(",").split`,`.map(x=>+x)
     lists.empty();
-    PrdinCart(data,myarray) // in ra giao diện
+    PrdinCart(data, myarray) // in ra giao diện
 }
-
 
 function PrdinCart(array,index) { // in sản phẩm trong giỏ hàng
     for(var i = 0; i < array.length; i++) {
@@ -85,7 +90,7 @@ function PrdinCart(array,index) { // in sản phẩm trong giỏ hàng
                     <div class="cart-infor">
                         <div>
                             <h4>${array[i].name}</h4>
-                            <span><i class="far fa-trash-alt"></i></span>
+                            <span onClick="removeInCard(${array[i].id})"><i class="far fa-trash-alt"></i></span>
                         </div>
                         <ul>
                             <li class="cart-count">

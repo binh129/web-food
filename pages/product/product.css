@@ -29,6 +29,7 @@ body {
     margin: 20px 0;
     cursor: pointer;
     transition: .2s ease;
+    display: flex;
 }
 .options-foods li:last-child {
     margin-top: 20px;
@@ -50,6 +51,7 @@ body {
     position: relative;
     display: none;
     float: right;
+    color: var(--primary-color);
 }
 .show-check .check {
     display: inline-block;
